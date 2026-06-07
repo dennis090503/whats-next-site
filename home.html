@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>What's Next? — Premium Career Navigation Intelligence</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ==========================================================================
+       UPDATED PREMIUM NAVIGATION INTERFACE COMPONENT
+       ========================================================================== */
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(11, 15, 25, 0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.4s ease;
+    }
+
+    .main-header.scrolled {
+      background: rgba(7, 10, 17, 0.85);
+      border-bottom: 1px solid rgba(0, 242, 254, 0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      font-size: 1.4rem;
+      color: #00f2fe;
+      animation: pulseGlow 3s infinite ease-in-out;
+      text-shadow: 0 0 10px rgba(0, 242, 254, 0.6);
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin: 0;
+      background: linear-gradient(135deg, #ffffff 40%, #a5b4fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      position: relative;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #94a3b8;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      padding: 6px 0;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #00f2fe;
+    }
+
+    /* Elegant sliding indicator line underneath links */
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #00f2fe, #4f46e5);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    /* Mobile Hamburger Trigger */
+    .mobile-nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 1010;
+    }
+
+    .mobile-nav-toggle .hamburger-line {
+      display: block;
+      width: 22px;
+      height: 2px;
+      margin: 5px auto;
+      background-color: #ffffff;
+      transition: all 0.3s ease-in-out;
+      border-radius: 2px;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(0,242,254,0.4)); }
+      50% { transform: scale(1.12); filter: drop-shadow(0 0 12px rgba(0,242,254,0.8)); }
+    }
+
+    /* Responsive Mobile Overrides */
+    @media (max-width: 768px) {
+      .mobile-nav-toggle {
+        display: block;
+      }
+
+      .mobile-nav-toggle.is-open .hamburger-line:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+        background-color: #00f2fe;
+      }
+      .mobile-nav-toggle.is-open .hamburger-line:nth-child(2) {
+        opacity: 0;
+      }
+      .mobile-nav-toggle.is-open .hamburger-line:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+        background-color: #00f2fe;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 280px;
+        height: 100vh;
+        background: rgba(7, 10, 17, 0.96);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 100px 40px 40px 40px;
+        gap: 28px;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6);
+      }
+
+      .nav-links.is-open {
+        transform: translateX(0);
+      }
+
+      .nav-links a {
+        font-size: 1.05rem;
+        width: 100%;
+        display: block;
+      }
+    }
+
+    /* Adjusting Hero spacing so content doesn't sit under fixed navbar */
+    .hero {
+      padding-top: 120px !important;
+    }
+
+    /* ==========================================================================
+       OPTIMIZED SEAMLESS HERO CAROUSEL COMPONENT (CINEMATIC REFRESH)
+       ========================================================================== */
+    .hero-carousel-viewport {
+      position: relative;
+      border-radius: 34px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      background: #0b0f19;
+      width: 44%;
+      max-width: 480px;
+      height: 200px;
+      margin: 0 auto;
+      align-self: center;
+    }
+
+    .hero-carousel-viewport::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 30%, rgba(3, 7, 18, 0.6) 100%),
+                  radial-gradient(circle at center, transparent 20%, rgba(3, 7, 18, 0.4) 100%);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .carousel-track-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .carousel-slide-node {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.9s cubic-bezier(0.25, 1, 0.2, 1), 
+                  visibility 0.9s cubic-bezier(0.25, 1, 0.2, 1);
+      z-index: 1;
+    }
+
+    .carousel-slide-node.active-slide {
+      opacity: 1;
+      visibility: visible;
+      z-index: 2;
+    }
+
+    .carousel-slide-node img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0;
+      transform: scale(1.0);
+      filter: saturate(0.85) contrast(1.02) blur(4px);
+      transition: transform 4s cubic-bezier(0.25, 1, 0.2, 1),
+                  opacity 0.9s cubic-bezier(0.25, 1, 0.2, 1),
+                  filter 0.9s cubic-bezier(0.25, 1, 0.2, 1);
+    }
+
+    .carousel-slide-node.active-slide img {
+      opacity: 0.85;
+      transform: scale(1.08);
+      filter: saturate(0.95) contrast(1.02) blur(0px);
+    }
+
+    .carousel-slide-meta {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 20px;
+      z-index: 4;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.7s cubic-bezier(0.25, 1, 0.2, 1), 
+                  transform 0.7s cubic-bezier(0.25, 1, 0.2, 1);
+    }
+
+    .carousel-slide-node.active-slide .carousel-slide-meta {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.1s;
+    }
+
+    .carousel-slide-meta .slide-badge {
+      display: inline-block;
+      font-size: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      color: #00f2fe;
+      background: rgba(3, 7, 18, 0.8);
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid rgba(0, 242, 254, 0.35);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 14px rgba(0, 242, 254, 0.15), 
+                  inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      text-shadow: 0 0 8px rgba(0, 242, 254, 0.4);
+    }
+
+    @media (max-width: 1024px) {
+      .hero-carousel-viewport {
+        height: 320px;
+        width: 100%;
+        margin-top: 2rem;
+      }
+    }
+    @media (max-width: 540px) {
+      .hero-carousel-viewport {
+        height: 260px;
+        border-radius: 60px;
+      }
+      .carousel-slide-meta {
+        padding-bottom: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="main-header" id="navbar">
+    <div class="nav-container">
+      <a href="home.html" class="logo-wrapper">
+        <span class="logo-icon">✦</span>
+        <h1 class="logo">What's Next ?</h1>
+      </a>
+      
+      <button class="mobile-nav-toggle" id="mobileMenuBtn" aria-label="Toggle navigation drawer menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <nav class="nav">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="home.html" class="active">Home</a></li>
+          <li><a href="about_us.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <section class="hero">
+    <div class="hero-glow-layer">
+      <div class="radial-glow color-blue"></div>
+      <div class="radial-glow color-cyan"></div>
+    </div>
+    
+    <div class="container hero-content-grid">
+      <div class="hero-text-block reveal-on-scroll">
+        <div class="badge-wrapper">
+          <span class="pill-badge">Next-Gen AI Career Discovery</span>
+        </div>
+        <h2>Discover Your Ideal <span class="gradient-text">Career Direction</span></h2>
+        <p>Explore elite options, navigate data-driven psychometric benchmarks, and unlock human consultations with verified industry experts.</p>
+        <div class="hero-cta-group">
+          <a href="#explore" class="btn-glow-primary">Start Assessment <i class="fa-solid fa-arrow-right-long"></i></a>
+          <a href="about_us.html" class="btn-outline">How it Works</a>
+        </div>
+      </div>
+      
+      <div class="hero-carousel-viewport reveal-on-scroll" id="heroCarousel">
+        <div class="carousel-track-container">
+          <div class="carousel-slide-node active-slide">
+            <img src="templates/images/student.png" alt="Students Academic Matrix Evaluation Layout">
+            <div class="carousel-slide-meta">
+              <span class="slide-badge">For Students</span>
+            </div>
+          </div>
+          <div class="carousel-slide-node">
+            <img src="templates/images/teacher.png" alt="Teachers and Academic Architecture Deployment Mapping">
+            <div class="carousel-slide-meta">
+              <span class="slide-badge">For Teachers</span>
+            </div>
+          </div>
+          <div class="carousel-slide-node">
+            <img src="templates/images/working_proffesional.png" alt="Working Professionals Career Velocity Tracking Dashboard">
+            <div class="carousel-slide-meta">
+              <span class="slide-badge">For Working Professionals</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="explore" class="features">
+    <div class="container">
+      <div class="section-heading reveal-on-scroll">
+        <span class="pill-badge">Ecosystem Features</span>
+        <h2 class="section-title">What We Offer</h2>
+        <p class="section-lead">Validated methodologies designed to remove guesswork from specialized growth tracks.</p>
+      </div>
+      
+      <div class="feature-grid">
+        <div class="feature-card reveal-on-scroll">
+          <div class="feature-img-box">
+            <img src="templates/images/counselling.webp" alt="Career Counselling Automation Layer" class="feature-card-img">
+          </div>
+          <div class="feature-card-body">
+            <div class="card-icon-box"><i class="fa-solid fa-user-tie"></i></div>
+            <h3>Career Counselling</h3>
+            <p>Instantly establish targeted access pipelines directly into vetted modern enterprise paths.</p>
+          </div>
+        </div>
+        
+        <div class="feature-card reveal-on-scroll">
+          <div class="feature-img-box">
+            <img src="templates/images/image_2.jpeg" alt="Psychometric Diagnostic Systems" class="feature-card-img">
+          </div>
+          <div class="feature-card-body">
+            <div class="card-icon-box"><i class="fa-solid fa-brain"></i></div>
+            <h3>Psychometric Tests</h3>
+            <p>Scientifically validated matrices testing spatial intelligence, personality dynamics, and algorithmic compatibility scales.</p>
+          </div>
+        </div>
+        
+        <div class="feature-card reveal-on-scroll">
+          <div class="feature-img-box">
+            <img src="templates/images/image_3.jpeg" alt="Algorithmic Stream Matching Frameworks" class="feature-card-img">
+          </div>
+          <div class="feature-card-body">
+            <div class="card-icon-box"><i class="fa-solid fa-chart-line"></i></div>
+            <h3>Stream Selector</h3>
+            <p>Algorithmic recommendation modeling helping secondary students cleanly isolate optimal post-secondary transitions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="career-programs">
+    <div class="container">
+      <div class="section-heading reveal-on-scroll">
+        <span class="pill-badge">Tailored Tracks</span>
+        <h2 class="section-title">Our Career Programs</h2>
+      </div>
+      
+      <div class="program-columns-grid">
+        <div class="program-card reveal-on-scroll">
+          <img src="templates/images/class_8.avif" alt="Class 8 through 12 Student Vectors" class="program-card-hero-img">
+          <div class="program-header-row">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <h3>For Students</h3>
+          </div>
+          <div class="program-sub-tier">
+            <h4>Class 8-9 Matrix</h4>
+            <p class="subtitle">Stream & Subject Mapping</p>
+            <p>Advanced diagnostic layers helping isolate foundational metrics long before specialized tracking cycles start.</p>
+          </div>
+          <div class="program-divider"></div>
+          <div class="program-sub-tier">
+            <h4>Virtual Labs</h4>
+            <p class="subtitle">Experiential Internships</p>
+            <p>Immersive, self-directed simulations proving practical field execution scenarios.</p>
+          </div>
+        </div>
+
+        <div class="program-card reveal-on-scroll">
+          <img src="templates/images/image_3.jpeg" alt="Academic Institution Architecture Mapping" class="program-card-hero-img">
+          <div class="program-header-row">
+            <i class="fa-solid fa-school"></i>
+            <h3>For Institutions</h3>
+          </div>
+          <div class="program-sub-tier">
+            <h4>Class 10-12 Funnel</h4>
+            <p class="subtitle">Tactical University Deployment</p>
+            <p>5-Dimensional profiling architectures syncing high-achieving profiles directly to institutional requirements.</p>
+          </div>
+          <div class="program-divider"></div>
+          <div class="program-sub-tier">
+            <h4>Global Admissions</h4>
+            <p class="subtitle">Overseas Application Funnel</p>
+            <p>Complete structural refinement ensuring absolute priority across overseas portfolios.</p>
+          </div>
+        </div>
+
+        <div class="program-card reveal-on-scroll">
+          <img src="templates/images/image_1.jpeg" alt="Corporate Career Level Optimization Engine" class="program-card-hero-img">
+          <div class="program-header-row">
+            <i class="fa-solid fa-briefcase"></i>
+            <h3>For Professionals</h3>
+          </div>
+          <div class="program-sub-tier">
+            <h4>Graduates & Beyond</h4>
+            <p class="subtitle">Career Velocity Pivot</p>
+            <p>High-tier functional modeling built to transform stagnating execution layers into elite management status.</p>
+          </div>
+          <div class="program-divider"></div>
+          <div class="program-sub-tier">
+            <h4>Liberal Arts Track</h4>
+            <p class="subtitle">Interdisciplinary Optimization</p>
+            <p>Nuanced strategy architectures structuring atypical candidate portfolios for rapid acceptance loops.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="experts">
+    <div class="container">
+      <div class="section-heading reveal-on-scroll">
+        <span class="pill-badge">Direct Access Network</span>
+        <h2 class="section-title">Schedule Live Strategic Consultation</h2>
+        <p class="section-lead">Bypass traditional informational gatekeeping. Interface face-to-face with active industry leads.</p>
+      </div>
+      
+      <div class="modern-experts-grid">
+        <div class="premium-expert-card reveal-on-scroll">
+          <div class="expert-identity-block">
+            <div class="avatar-shield">
+              <div class="pulse-beacon-live"></div>
+              <img src="templates/images/expert2.jpg" alt="Monil Jain Portrait" class="expert-avatar-img" />
+            </div>
+            <div class="expert-meta-text">
+              <h3>Anshul Jain</h3>
+              <p class="title-sub">Growth Director</p>
+              <p class="exp-metric"><i class="fa-solid fa-history"></i> 16 Yrs Active</p>
+            </div>
+          </div>
+          <button class="talk-telecom-btn"><span>Book Live Link</span> <i class="fa-solid fa-arrow-trend-up"></i></button>
+        </div>
+
+        <div class="premium-expert-card reveal-on-scroll">
+          <div class="expert-identity-block">
+            <div class="avatar-shield">
+              <div class="pulse-beacon-live"></div>
+              <img src="templates/images/expert3.webp" alt="Jayesh Patel Portrait" class="expert-avatar-img" />
+            </div>
+            <div class="expert-meta-text">
+              <h3>Jayesh Patel</h3>
+              <p class="title-sub">Infrastructure Lead</p>
+              <p class="exp-metric"><i class="fa-solid fa-history"></i> 14 Yrs Active</p>
+            </div>
+          </div>
+          <button class="talk-telecom-btn"><span>Book Live Link</span> <i class="fa-solid fa-arrow-trend-up"></i></button>
+        </div>
+
+        <div class="premium-expert-card reveal-on-scroll">
+          <div class="expert-identity-block">
+            <div class="avatar-shield">
+              <div class="pulse-beacon-live"></div>
+              <img src="templates/images/expert4.jpg" alt="Prashant Shukla Portrait" class="expert-avatar-img" />
+            </div>
+            <div class="expert-meta-text">
+              <h3>Prashant Shukla</h3>
+              <p class="title-sub">Principal Consultant</p>
+              <p class="exp-metric"><i class="fa-solid fa-history"></i> 20 Yrs Active</p>
+            </div>
+          </div>
+          <button class="talk-telecom-btn"><span>Book Live Link</span> <i class="fa-solid fa-arrow-trend-up"></i></button>
+        </div>
+      </div>
+    </div>
+  </section> 
+
+  <footer class="main-footer">
+    <div class="container footer-content-grid">
+      <div class="footer-brand-column">
+        <div class="logo-wrapper">
+          <span class="logo-icon">✦</span>
+          <span class="logo">What's Next ?</span>
+        </div>
+        <p class="footer-mission">Empowering high-performance career optimization paths through deep metric validation networks.</p>
+        <div class="footer-social-tray">
+          <a href="#" class="social-icon-link"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" class="social-icon-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon-link"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-links-column">
+        <h3>Contact Channels</h3>
+        <p><i class="fas fa-envelope"></i> support@careerguide.com</p>
+        <p><i class="fas fa-phone-alt"></i> +91-9999999999</p>
+      </div>
+      
+      <div class="footer-links-column">
+        <h3>System Links</h3>
+        <ul>
+          <li><a href="#">Security Matrix</a></li>
+          <li><a href="#">Support Base</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="container footer-bottom-meta">
+      <p class="slogan-text">"We map logical, hyper-vetted pathways to unlock structural clarity you can cleanly deploy."</p>
+      <div class="legal-row">
+        <p>&copy; 2026 What's Next?. System architecture optimized.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Dynamic Fixed Navbar Scroll Mechanics 
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // 2. Mobile Drawer Menu Logic Toggle
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const navLinks = document.getElementById('navLinks');
+
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenuBtn.classList.toggle('is-open');
+        navLinks.classList.toggle('is-open');
+      });
+
+      // Close menu if links are selected (useful for multi-target / single page structures)
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuBtn.classList.remove('is-open');
+          navLinks.classList.remove('is-open');
+        });
+      });
+
+      // 3. High Performance Scroll Animation Pipeline 
+      const animationTargets = document.querySelectorAll('.reveal-on-scroll');
+      const elementObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            elementObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+      
+      animationTargets.forEach(element => elementObserver.observe(element));
+
+      // 4. Dynamic Spotlight Mouse Tracking Script
+      const dynamicCards = document.querySelectorAll('.feature-card');
+      dynamicCards.forEach(card => {
+        card.addEventListener('mousemove', (event) => {
+          const rect = card.getBoundingClientRect();
+          const horizontalPos = event.clientX - rect.left;
+          const verticalPos = event.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${horizontalPos}px`);
+          card.style.setProperty('--mouse-y', `${verticalPos}px`);
+        });
+      });
+
+      // 5. Fast-Tracking Auto Rotation Carousel Loop
+      const slides = document.querySelectorAll('.carousel-slide-node');
+      let currentIdx = 0;
+      const stepDuration = 2500;
+
+      function advanceSlide() {
+        slides[currentIdx].classList.remove('active-slide');
+        currentIdx = (currentIdx + 1) % slides.length;
+        slides[currentIdx].classList.add('active-slide');
+      }
+
+      setInterval(advanceSlide, stepDuration);
+    });
+  </script>
+</body>
+</html>

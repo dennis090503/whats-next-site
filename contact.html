@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us — Secure Communications Matrix | What's Next ?</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-dark-absolute: #030712;
+      --text-secondary: #94a3b8;
+      --border-glow-low: rgba(255, 255, 255, 0.08);
+      --bg-glass-panel: rgba(11, 15, 25, 0.65);
+      --bg-glass-hover: rgba(255, 255, 255, 0.03);
+      --neon-cyan: #00f2fe;
+    }
+
+    body {
+      background-color: var(--bg-dark-absolute);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      color: #fff;
+    }
+
+    /* ==========================================================================
+       SYNCHRONIZED PREMIUM NAVIGATION INTERFACE COMPONENT
+       ========================================================================== */
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(11, 15, 25, 0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.4s ease;
+    }
+
+    .main-header.scrolled {
+      background: rgba(7, 10, 17, 0.85);
+      border-bottom: 1px solid rgba(0, 242, 254, 0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      font-size: 1.4rem;
+      color: var(--neon-cyan);
+      animation: pulseGlow 3s infinite ease-in-out;
+      text-shadow: 0 0 10px rgba(0, 242, 254, 0.6);
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin: 0;
+      background: linear-gradient(135deg, #ffffff 40%, #a5b4fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      position: relative;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #94a3b8;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      padding: 6px 0;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #00f2fe;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #00f2fe, #4f46e5);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .mobile-nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 1010;
+    }
+
+    .mobile-nav-toggle .hamburger-line {
+      display: block;
+      width: 22px;
+      height: 2px;
+      margin: 5px auto;
+      background-color: #ffffff;
+      transition: all 0.3s ease-in-out;
+      border-radius: 2px;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(0,242,254,0.4)); }
+      50% { transform: scale(1.12); filter: drop-shadow(0 0 12px rgba(0,242,254,0.8)); }
+    }
+
+    @media (max-width: 768px) {
+      .mobile-nav-toggle {
+        display: block;
+      }
+
+      .mobile-nav-toggle.is-open .hamburger-line:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+        background-color: #00f2fe;
+      }
+      .mobile-nav-toggle.is-open .hamburger-line:nth-child(2) {
+        opacity: 0;
+      }
+      .mobile-nav-toggle.is-open .hamburger-line:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+        background-color: #00f2fe;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 280px;
+        height: 100vh;
+        background: rgba(7, 10, 17, 0.96);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 100px 40px 40px 40px;
+        gap: 28px;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6);
+      }
+
+      .nav-links.is-open {
+        transform: translateX(0);
+      }
+
+      .nav-links a {
+        font-size: 1.05rem;
+        width: 100%;
+        display: block;
+      }
+    }
+
+    /* ==========================================================================
+       INTERFACE ARCHITECTURAL GRID MODIFICATIONS
+       ========================================================================== */
+    .contact-hero {
+      position: relative;
+      padding: 11rem 0 6rem 0;
+      overflow: hidden;
+    }
+    
+    .contact-split-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 5rem;
+      align-items: start;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .contact-info-panel {
+      position: sticky;
+      top: 140px;
+    }
+
+    .contact-title h2 {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      color: #fff;
+      margin-top: 1rem;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #fff 30%, var(--neon-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .contact-title p {
+      color: var(--text-secondary);
+      margin: 1.5rem 0 3rem 0;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    
+    .contact-banner-graphic-frame {
+      width: 100%;
+      height: 180px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 2.5rem;
+      border: 1px solid var(--border-glow-low);
+      position: relative;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .contact-banner-graphic-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to left, rgba(3,7,18,0.95), rgba(3,7,18,0.3));
+    }
+
+    .contact-banner-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.5;
+      filter: saturate(0.85) contrast(1.1);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .contact-banner-graphic-frame:hover .contact-banner-img {
+      transform: scale(1.04);
+    }
+
+    .comms-channels-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .channel-card {
+      background: var(--bg-glass-panel);
+      border: 1px solid var(--border-glow-low);
+      padding: 1.5rem;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .channel-card:hover {
+      background: var(--bg-glass-hover);
+      border-color: rgba(0, 242, 254, 0.3);
+      transform: translateX(6px);
+      box-shadow: 0 10px 25px rgba(0, 242, 254, 0.05);
+    }
+
+    .channel-icon-shield {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      background: rgba(0, 242, 254, 0.05);
+      border: 1px solid rgba(0, 242, 254, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--neon-cyan);
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    .channel-card:hover .channel-icon-shield {
+      background: var(--neon-cyan);
+      color: #030712;
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+    }
+
+    .channel-details h4 {
+      font-size: 0.95rem;
+      color: #fff;
+      font-weight: 700;
+      margin: 0 0 0.2rem 0;
+    }
+
+    .channel-details p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    
+    /* MODERN FORM CONTROL CONTAINER */
+    .premium-form-container {
+      background: var(--bg-glass-panel);
+      border: 1px solid var(--border-glow-low);
+      border-radius: 24px;
+      padding: 3.5rem;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+    }
+
+    .form-group-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-field-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .form-field-wrapper.no-margin {
+      margin-bottom: 0;
+    }
+
+    .form-field-wrapper label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .premium-input {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border-glow-low);
+      border-radius: 10px;
+      padding: 0.95rem 1.2rem;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .premium-input:focus {
+      outline: none;
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.12);
+      background: rgba(0, 0, 0, 0.45);
+    }
+    
+    .custom-select-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .custom-select-wrapper select.premium-input {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      padding-right: 3rem;
+    }
+
+    .custom-select-wrapper::after {
+      content: '\f107';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      right: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      font-size: 1.1rem;
+      pointer-events: none;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .custom-select-wrapper:focus-within::after {
+      color: var(--neon-cyan);
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    .premium-input option {
+      background: #0b0f19;
+      color: #fff;
+    }
+
+    textarea.premium-input {
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    .submit-glow-btn {
+      width: 100%;
+      background: #fff;
+      color: #030712;
+      border: 1px solid transparent;
+      padding: 1.1rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      margin-top: 1rem;
+    }
+
+    .submit-glow-btn:hover {
+      background: var(--neon-cyan);
+      box-shadow: 0 15px 30px rgba(0, 242, 254, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .submit-glow-btn i {
+      transition: transform 0.3s ease;
+    }
+
+    .submit-glow-btn:hover i {
+      transform: translateX(4px) translateY(-2px);
+    }
+
+    .pill-badge {
+      display: inline-block;
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* FOOTER STYLING CONFIG */
+    .main-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      background: #02040a;
+      padding: 5rem 0 2.5rem 0;
+    }
+
+    .footer-content-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem 2rem;
+    }
+
+    .footer-brand-column p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 1.5rem 0;
+    }
+
+    .footer-social-tray {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-icon-link {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .social-icon-link:hover {
+      color: #fff;
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .footer-links-column h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links-column p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links-column i {
+      color: var(--neon-cyan);
+      margin-right: 0.5rem;
+    }
+
+    .footer-links-column ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links-column li {
+      margin-bottom: 0.85rem;
+    }
+
+    .footer-links-column a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links-column a:hover {
+      color: #fff;
+    }
+
+    .footer-bottom-meta {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 0 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .slogan-text {
+      color: var(--text-secondary);
+      font-style: italic;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .legal-row p {
+      color: rgba(255,255,255,0.3);
+      font-size: 0.8rem;
+      margin: 0;
+    }
+
+    /* SCROLL ANIMATION MASKS */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE BREAKPOINT SYSTEMS */
+    @media (max-width: 968px) {
+      .contact-split-grid { 
+        grid-template-columns: 1fr; 
+        gap: 4rem; 
+      }
+      .contact-info-panel { 
+        position: static; 
+        order: 1;
+      }
+      .premium-form-container { 
+        padding: 2.5rem; 
+        order: 0;
+      }
+      .footer-content-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .form-group-row { grid-template-columns: 1fr; gap: 1.5rem; }
+      .premium-form-container { padding: 1.75rem; }
+      .contact-title h2 { font-size: 2.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="main-header" id="navbar">
+    <div class="nav-container">
+      <a href="home.html" class="logo-wrapper">
+        <span class="logo-icon">✦</span>
+        <h1 class="logo">What's Next ?</h1>
+      </a>
+      
+      <button class="mobile-nav-toggle" id="mobileMenuBtn" aria-label="Toggle navigation drawer menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <nav class="nav">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="home.html">Home</a></li>
+          <li><a href="about_us.html">About Us</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="contact-hero">
+    <div class="hero-glow-layer">
+      <div class="radial-glow color-cyan" style="position: absolute; top: -20%; left: 50%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,242,254,0.08) 0%, transparent 70%); transform: translate(-50%, 0);"></div>
+    </div>
+
+    <div class="container contact-split-grid">
+      
+      <div class="premium-form-container reveal-on-scroll">
+        
+        <form action="https://api.web3forms.com/submit" method="POST" id="intakeForm">
+          <input type="hidden" name="access_key" value="5a1fd320-deaa-406a-b844-7ad7f49fa18e">
+
+          <input type="hidden" name="subject" value="New Secure Intake Parameters Logged">
+          <input type="hidden" name="redirect" value="">
+
+          <div class="form-group-row">
+            <div class="form-field-wrapper no-margin">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" name="First Name" class="premium-input" placeholder="Alex" required />
+            </div>
+            <div class="form-field-wrapper no-margin">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" name="Last Name" class="premium-input" placeholder="Mercer" required />
+            </div>
+          </div>
+
+          <div class="form-field-wrapper">
+            <label for="emailAddress">Work/Academic Email</label>
+            <input type="email" id="emailAddress" name="Email Address" class="premium-input" placeholder="alex@matrix.com" required />
+          </div>
+
+          <div class="form-field-wrapper">
+            <label for="trackTarget">Intake Track Selection</label>
+            <div class="custom-select-wrapper">
+              <select id="trackTarget" name="Selected Track Route" class="premium-input">
+                <option value="student">Track 01 — Individual Student Funnel</option>
+                <option value="institution">Track 02 — Academic Institution Integration</option>
+                <option value="professional">Track 03 — Corporate Pivot Architecture</option>
+                <option value="other">General Operational Query</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-field-wrapper">
+            <label for="messageBody">Message Specifications</label>
+            <textarea id="messageBody" name="Functional Requirements" class="premium-input" placeholder="Outline your functional requirements or development bottlenecks..." required></textarea>
+          </div>
+
+          <button type="submit" class="submit-glow-btn" id="submitBtn">
+            <span id="btnText">Transmit Parameters</span> 
+            <i class="fa-solid fa-paper-plane" id="btnIcon"></i>
+          </button>
+        </form>
+      </div>
+
+      <div class="contact-info-panel reveal-on-scroll">
+        <div class="contact-title">
+          <span class="pill-badge" style="color: #94a3b8; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05)">Communications Matrix</span>
+          <h2>Let's Outline Your <span class="gradient-text">Next Vector</span></h2>
+          <p>Have operational questions about platform parameters? Connect directly with our dispatch layer.</p>
+        </div>
+
+        <div class="contact-banner-graphic-frame">
+          <img src="templates/images/contact_us.jpeg" alt="Global Strategic Comm Channels Network" class="contact-banner-img">
+        </div>
+
+        <div class="comms-channels-list">
+          <a href="mailto:support@careerguide.com" class="channel-card">
+            <div class="channel-icon-shield"><i class="fa-solid fa-envelope"></i></div>
+            <div class="channel-details">
+              <h4>Electronic Dispatch</h4>
+              <p>support@careerguide.com</p>
+            </div>
+          </a>
+          
+          <a href="tel:+919999999999" class="channel-card">
+            <div class="channel-icon-shield"><i class="fa-solid fa-phone"></i></div>
+            <div class="channel-details">
+              <h4>Direct Telecom Infrastructure</h4>
+              <p>+91-9999999999</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="main-footer">
+    <div class="container footer-content-grid">
+      <div class="footer-brand-column">
+        <div class="logo-wrapper">
+          <span class="logo-icon">✦</span>
+          <span class="logo">What's Next ?</span>
+        </div>
+        <p class="footer-mission">Empowering high-performance career optimization paths through deep metric validation networks.</p>
+        <div class="footer-social-tray">
+          <a href="#" class="social-icon-link"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" class="social-icon-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon-link"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-links-column">
+        <h3>Contact Channels</h3>
+        <p><i class="fas fa-envelope"></i> support@careerguide.com</p>
+        <p><i class="fas fa-phone-alt"></i> +91-9999999999</p>
+      </div>
+      
+      <div class="footer-links-column">
+        <h3>System Links</h3>
+        <ul>
+          <li><a href="#">Security Matrix</a></li>
+          <li><a href="#">Support Base</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="container footer-bottom-meta">
+      <p class="slogan-text">"We map logical, hyper-vetted pathways to unlock structural clarity you can cleanly deploy."</p>
+      <div class="legal-row">
+        <p>&copy; 2026 What's Next?. System architecture optimized.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Dynamic Fixed Navbar Scroll Mechanics
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // 2. Mobile Drawer Menu Logic Toggle
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const navLinks = document.getElementById('navLinks');
+
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenuBtn.classList.toggle('is-open');
+        navLinks.classList.toggle('is-open');
+      });
+
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuBtn.classList.remove('is-open');
+          navLinks.classList.remove('is-open');
+        });
+      });
+
+      // 3. High Performance Scroll Animation Pipeline
+      const targets = document.querySelectorAll('.reveal-on-scroll');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      targets.forEach(t => observer.observe(t));
+
+      // 4. Asynchronous Form Engine Pipeline Integration
+      const form = document.getElementById('intakeForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      const btnIcon = document.getElementById('btnIcon');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault(); // HALT template redirection mechanics
+        
+        // Lock interactive triggers & apply pending styles
+        submitBtn.style.pointerEvents = 'none';
+        submitBtn.style.background = 'rgba(0, 242, 254, 0.15)';
+        submitBtn.style.color = '#00f2fe';
+        submitBtn.style.borderColor = '#00f2fe';
+        btnText.textContent = "Encrypting Stream...";
+        btnIcon.className = "fa-solid fa-circle-notch fa-spin";
+
+        const formData = new FormData(form);
+        const jsonObject = Object.fromEntries(formData.entries());
+
+        // Dispatch data to serverless cloud processing network
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(jsonObject)
+        })
+        .then(async (response) => {
+          let res = await response.json();
+          if (response.status === 200) {
+            // Processing parameters confirmed successfully
+            btnText.textContent = "Parameters Transmitted";
+            btnIcon.className = "fa-solid fa-check";
+            submitBtn.style.background = 'rgba(16, 185, 129, 0.15)';
+            submitBtn.style.color = '#10b981';
+            submitBtn.style.borderColor = '#10b981';
+            form.reset(); // Wipe all matrix fields cleanly
+          } else {
+            console.error('System validation drop:', res);
+            btnText.textContent = "Transmission Fault";
+            btnIcon.className = "fa-solid fa-triangle-exclamation";
+            submitBtn.style.background = 'rgba(239, 68, 68, 0.15)';
+            submitBtn.style.color = '#ef4444';
+            submitBtn.style.borderColor = '#ef4444';
+          }
+        })
+        .catch(error => {
+          console.error('Network infrastructure error:', error);
+          btnText.textContent = "Offline Fault";
+          btnIcon.className = "fa-solid fa-wifi";
+          submitBtn.style.background = 'rgba(239, 68, 68, 0.15)';
+          submitBtn.style.color = '#ef4444';
+          submitBtn.style.borderColor = '#ef4444';
+        })
+        .finally(() => {
+          // Re-arm interactive interface after 4 seconds cool-down loop
+          setTimeout(() => {
+            submitBtn.style.pointerEvents = 'auto';
+            submitBtn.style.background = '#fff';
+            submitBtn.style.color = '#030712';
+            submitBtn.style.borderColor = 'transparent';
+            btnText.textContent = "Transmit Parameters";
+            btnIcon.className = "fa-solid fa-paper-plane";
+          }, 4000);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
